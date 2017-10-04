@@ -1,0 +1,15 @@
+current directory: /home/jbrooks/src/ruby/shine/vendor/bundle/ruby/2.4.0/gems/bindex-0.5.0/ext/bindex
+/usr/bin/ruby2.4 -r ./siteconf20171004-5381-1vti9ar.rb extconf.rb
+creating Makefile
+
+current directory: /home/jbrooks/src/ruby/shine/vendor/bundle/ruby/2.4.0/gems/bindex-0.5.0/ext/bindex
+make "DESTDIR=" clean
+
+current directory: /home/jbrooks/src/ruby/shine/vendor/bundle/ruby/2.4.0/gems/bindex-0.5.0/ext/bindex
+make "DESTDIR="
+compiling cruby.c
+linking shared-object bindex/cruby.so
+
+current directory: /home/jbrooks/src/ruby/shine/vendor/bundle/ruby/2.4.0/gems/bindex-0.5.0/ext/bindex
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 cruby.so ./.gem.20171004-5381-1d5s6zm/bindex
