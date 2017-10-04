@@ -19,7 +19,7 @@ default: &default
   encoding: unicode
   host: localhost
   username: shine
-  password: shine@123
+  password: <%= ENV['SHINE_PASSWORD'] %>
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -85,4 +85,4 @@ production:
   <<: *default
   database: shine_production
   username: shine
-  password: <%= ENV['SHINE_DATABASE_PASSWORD'] %>
+  password: <%= ENV['SHINE_PRODUCTION_PASSWORD'] %>
