@@ -46,4 +46,6 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   # Use foreman in order to run webpack-dev-server and rails server in one window
   gem 'foreman'
+  # Using faker to create test and development data
+  gem 'faker'
 end
