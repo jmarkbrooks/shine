@@ -3,6 +3,7 @@ import { Component, NgModule    } from "@angular/core";
 import { BrowserModule          } from "@angular/platform-browser";
 import { FormsModule            } from "@angular/forms";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
+import { Http, HttpModule       } from "@angular/http";
 
 var CustomerSearchComponent = Component({
   selector: "shine-customer-search",
@@ -17,11 +18,11 @@ var CustomerSearchComponent = Component({
       <input type="text" id="keywords" name="keywords" \
              placeholder="First Name, Last Name, or Email Address" \
              class="form-control input-lg" \
-             bindon-ngModel="keywords"> \
+             [(ngModel)]="keywords"> \
       <span class="input-group-btn"> \
       <input type="submit" value="Find Customers" \
              class="btn btn-primary btn-lg" \
-             on-click="search()"> \
+             (click)="search()"> \
       </span> \
     </div> \
     </form> \
@@ -47,60 +48,37 @@ var CustomerSearchComponent = Component({
 </section> \
   '
 }).Class({
-  constructor: function() {
-    this.customers = null;
-    this.keywords = "";
-  },
-  search: function() {
-    if (this.keywords == "pat") {
-      this.customers = RESULTS;
-    } else {
-      this.customers = [];
+  constructor: [
+    Http,
+    function(http) {
+      this.customers = null;
+      this.keywords = "";
+      this.http = http;
     }
+  ],
+  search: function() {
+    var self = this;
+    self.http.get(
+      "/customers.json?keywords=" + self.keywords
+    ).subscribe(
+      function(response) {
+        self.customers = response.json().customers;
+      },
+      function(response) {
+        window.alert(response);
+      }
+    );
   }
 });
 var CustomerAppModule = NgModule({
-  imports: [ BrowserModule, FormsModule ],
+  imports: [ 
+    BrowserModule,
+    FormsModule,
+    HttpModule 
+  ],
   declarations: [ CustomerSearchComponent ],
   bootstrap:    [ CustomerSearchComponent ]
 }).Class({
   constructor: function() {}
 });
-var RESULTS = [
-  {
-    first_name: "Pat",
-    last_name: "Smith",
-    username: "psmith",
-    email: "pat.smith@somewhere.net",
-    created_at: "2016-02-05",
-  },
-  {
-    first_name: "Patrick",
-    last_name: "Jones",
-    username: "pjpj",
-    email: "jones.p@business.net",
-    created_at: "2014-03-05",
-  },
-  {
-    first_name: "Patricia",
-    last_name: "Benjamin",
-    username: "pattyb",
-    email: "benjie@aol.info",
-    created_at: "2016-01-02",
-  },
-  {
-    first_name: "Patty",
-    last_name: "Patrickson",
-    username: "ppat",
-    email: "pppp@freemail.computer",
-    created_at: "2016-02-05",
-  },
-  {
-    first_name: "Jane",
-    last_name: "Patrick",
-    username: "janesays",
-    email: "janep@company.net",
-    created_at: "2013-01-05",
-  },
-];
 platformBrowserDynamic().bootstrapModule(CustomerAppModule);
