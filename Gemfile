@@ -5,9 +5,10 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
+# Install rake so that bundler can find it
+gem 'rake'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.4'
+gem 'rails', '~> 5.2.0'
 # Use webpacker to manage javascript dependencies
 gem 'webpacker'
 # Use postgresql as the database for Active Record
@@ -44,8 +45,7 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
-  # Use foreman in order to run webpack-dev-server and rails server in one window
-  gem 'foreman'
   # Using faker to create test and development data
   gem 'faker'
+  gem 'foreman'
 end
